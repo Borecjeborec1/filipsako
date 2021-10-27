@@ -1,0 +1,4 @@
+loadImages()
+spawnBlocks()
+handleMovement()
+animate()
