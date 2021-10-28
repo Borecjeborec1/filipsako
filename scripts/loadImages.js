@@ -1,7 +1,7 @@
 function loadImages() {
   for (let i = 0; i < dirArr.length; ++i) {
     images["player" + dirArr[i]] = new Image()
-    images["player" + dirArr[i]].src = `${imgPath}filip-${dirArr[i]}.png`
+    images["player" + dirArr[i]].src = `${imgPath}filip-${dirArr[i]}.png`//filip-transparent.png
     images["lepik0" + dirArr[i]] = new Image()
     images["lepik0" + dirArr[i]].src = `${imgPath}lepik-${dirArr[i]}.png`
     images["lepik1" + dirArr[i]] = new Image()
@@ -17,9 +17,11 @@ function loadImages() {
   images.tblock.src = imgPath + "katedra.png"
   images.food = new Image()
   images.food.src = imgPath + "pascika.png"
+  images.foodboost = new Image()
+  images.foodboost.src = imgPath + "boost.png"
   images.barel = new Image()
   images.barel.src = imgPath + "sud.png"
   images.mys = new Image()
-  images.mys.src = imgPath + "myslenka.png"
+  images.mys.src = imgPath + "myslenkam.png"
 }
 

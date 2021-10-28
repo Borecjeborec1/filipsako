@@ -3,7 +3,7 @@ const foodRate = 5 // 1:X
 const foodOffset = 10
 
 const startBlockY = 70
-const endBlockY = 560
+const endBlockY = 550
 const startBlockX = 70
 const blockGap = 50
 const blockOffset = 10

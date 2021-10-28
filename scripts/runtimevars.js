@@ -8,11 +8,13 @@ let images = {}
 let liborRotation = 0
 let lrCounter = 35
 
+
 let animCounter = 0
 
 
+let eaten = 0
 let score = 0
-let cleared = 0
+let cleared = 1
 
 let gameover = false
 let playAnim = false

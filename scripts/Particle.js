@@ -13,8 +13,10 @@ class Particle {
     this.opacityMinus = opacityMinus
   }
   draw() {
+    ctx.globalAlpha = this.opacity;
     ctx.fillStyle = this.color;
     ctx.fillRect(this.x, this.y, this.width, this.height)
+    ctx.globalAlpha = 1;
   }
   update() {
     if (this.opacity > 0) {

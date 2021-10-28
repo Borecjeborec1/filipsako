@@ -34,9 +34,9 @@ const barel = {
 }
 const mys = {
   x: canvas.width,
-  y: canvas.height - blockGap,
-  width: charSize * 3 - 10,
-  height: charSize - 10,
+  y: canvas.height - 35,
+  width: charSize + 15,
+  height: charSize - 15,
   speed: 4,
 }
 function handleBarel(isBarel) {
@@ -59,6 +59,7 @@ function handleBarel(isBarel) {
     barel.dir == 1 ? barel.x -= barel.speed : barel.x += barel.speed
     barel.dir = barel.x < 0 || barel.x > canvas.width - barel.width ? !barel.dir : barel.dir
     barel.speed < 6 ? barel.speed += 0.003 : barel.speed = 6
+    ctx.strokeRect(barel.x, barel.y, barel.width, barel.height)
     ctx.drawImage(images.barel, barel.x, barel.y, barel.width, barel.height)
     // ctx.drawImage(images.mys, barel.sX, barel.sY, barel.fWidth, barel.fHeight, barel.x, barel.y, barel.width, barel.height)
   } else {
@@ -78,6 +79,7 @@ function handleBarel(isBarel) {
     // }
     mys.x > 0 ? mys.x -= mys.speed : mys.x = canvas.width - blockGap * 2
     mys.speed < 8 ? mys.speed += 0.001 : mys.speed = 8
+    ctx.strokeRect(mys.x, mys.y, mys.width, mys.height)
     ctx.drawImage(images.mys, mys.x, mys.y, mys.width, mys.height)
     // ctx.drawImage(images.mys, mys.sX, mys.sY, mys.fWidth, mys.fHeight, mys.x, mys.y, mys.width, mys.height)
   }
@@ -112,6 +114,7 @@ function spawnParticles(isLepik) {
 function spawnBlocks() {
   let blocksY = startBlockY
   let blocksX = -startBlockX
+  foods.length = 0
   while (true) {
     blocksY += blockGap
     if (blocksY >= (Math.floor(Math.random() * (blockGap * 6 - blockGap * 3)) + (blockGap * 3))) {
@@ -122,6 +125,7 @@ function spawnBlocks() {
       for (let i = startBlockY; i <= startBlockY + 3 * blockGap; i += blockGap) {
         blocks.push(new tBlock(blocksX, i))
       }
+      foods[Math.floor(Math.random() * foods.length)].src = images.foodboost
       break
     }
     if (Math.floor(Math.random() * foodRate)) {
@@ -138,7 +142,8 @@ function spawnBlocks() {
 
     }
     blocks.push(new Block(blocksX, blocksY));
-    blocks.push(new Block(blocksX, endBlockY - blocksY));
+    if (blocksY != 270)
+      blocks.push(new Block(blocksX, endBlockY - blocksY));
   }
 }
 function handleBlocks() {
@@ -182,7 +187,14 @@ function handleFood() {
         audio.play()
       }
       foods[i].x = 1000
+      eaten++
       score++
+      if (foods[i].src != images.food) {
+        player.speed = 8
+        setTimeout(() => {
+          player.speed = 4
+        }, 5000)
+      }
     }
     foods[i].draw()
   }
@@ -203,6 +215,7 @@ function handlePlayer() {
       if (player.y + player.height < canvas.height && player.lastFacing != player.facing) player.y += player.speed
       break;
   }
+  ctx.strokeRect(player.x, player.y, player.width, player.height)
   ctx.drawImage(images["player" + player.facing], player.x, player.y, player.width, player.height)
 }
 
@@ -233,6 +246,7 @@ function handleLepik() {
       if (lepik.y + lepik.height < canvas.height && lepik.lastFacing != lepik.facing) lepik.y += lepik.speed
       break;
   }
+  ctx.strokeRect(lepik.x, lepik.y, lepik.width, lepik.height)
   ctx.drawImage(images["lepik" + cleared + lepik.facing], lepik.x, lepik.y, lepik.width, lepik.height)
 
   liborRotation++
@@ -280,7 +294,8 @@ function animate() {
       handleBarel(false)
   }
   if (playAnim) handleParticles()
-  if (score == foods.length) {
+  if (eaten == foods.length) {
+    eaten = 0
     let audio = document.createElement("audio")
     audio.src = audioPath + "juhu.mp3"
     audio.play()
@@ -297,6 +312,7 @@ function animate() {
   if (cleared == 3) {
     gameWon()
   }
+  console.log("eaten: " + score)
   document.getElementById("refresh").style.display = "block"
 }
 

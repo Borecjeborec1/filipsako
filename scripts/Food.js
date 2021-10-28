@@ -4,8 +4,9 @@ class Food {
     this.height = 30
     this.x = x
     this.y = y
+    this.src = images.food
   }
   draw() {
-    ctx.drawImage(images.food, this.x, this.y, this.width, this.height)
+    ctx.drawImage(this.src, this.x, this.y, this.width, this.height)
   }
 }
