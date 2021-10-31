@@ -23,5 +23,6 @@ function loadImages() {
   images.barel.src = imgPath + "sud.png"
   images.mys = new Image()
   images.mys.src = imgPath + "myslenkam.png"
+  // images.playerright.src = `${imgPath}sfilip-right.png`
 }
 

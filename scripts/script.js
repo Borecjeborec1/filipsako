@@ -8,6 +8,9 @@ const player = {
   y: blockOffset,
   width: charSize,
   height: charSize,
+  // sX: 0,
+  // sWidth: 203,
+  // sHeight: 255,
   speed: 4,
   facing: "right",
   lastFacing: "",
@@ -199,7 +202,6 @@ function handleFood() {
     foods[i].draw()
   }
 }
-
 function handlePlayer() {
   switch (player.facing) {
     case "left":
@@ -216,6 +218,10 @@ function handlePlayer() {
       break;
   }
   ctx.strokeRect(player.x, player.y, player.width, player.height)
+  // t++
+  // if (t % 5 == 0)
+  //   player.sX <= player.sWidth * 6 ? player.sX += player.sWidth : player.sX = 0
+  // ctx.drawImage(images["player" + player.facing], player.sX, 0, player.sWidth, player.sHeight, player.x, player.y, player.width, player.height)
   ctx.drawImage(images["player" + player.facing], player.x, player.y, player.width, player.height)
 }
 

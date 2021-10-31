@@ -14,7 +14,7 @@ let animCounter = 0
 
 let eaten = 0
 let score = 0
-let cleared = 1
+let cleared = 0
 
 let gameover = false
 let playAnim = false
